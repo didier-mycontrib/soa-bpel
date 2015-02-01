@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ====================================================================== 
+     3 janv. 2013 10:01:32                                                        
+
+     deployBpel    
+     deployer un processus bpel dans tomcat+ode
+                   
+     formation                                                                
+     ====================================================================== -->
+<project name="deployBpel" default="default">
+    <description>
+            deployer un processus bpel dans tomcat+ode
+    </description>
+	
+	<property name="ODE_PROCESSES_DIR" value="/opt/apache-tomcat-7.0.30/webapps/ode/WEB-INF/processes" />
+
+    <!-- ================================= 
+          target: default              
+         ================================= -->
+    <target name="default" depends="deploy" description="deployer un processus bpel dans tomcat+ode">
+        
+    </target>
+
+    <!-- - - - - - - - - - - - - - - - - - 
+          target: deploy                      
+         - - - - - - - - - - - - - - - - - -->
+    <target name="deploy">
+    	<copy  todir="${ODE_PROCESSES_DIR}/axb">
+    	    <fileset dir="bpelContent"></fileset>
+    	</copy>
+    </target>
+
+</project>

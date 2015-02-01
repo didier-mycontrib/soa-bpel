@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<deploy xmlns="http://www.apache.org/ode/schemas/dd/2007/03"
+ xmlns:tp="http://tp"
+ xmlns:nsc="http://service.tp/">
+  <process name="tp:axb">
+    <active>true</active>
+    <retired>false</retired>
+    
+    <provide partnerLink="client">
+       <!-- le name du  partnerLink est dans le bpel -->
+       <service name="tp:axb" port="axbPort"/>
+       <!-- les noms du service et du port sont dans le bas
+            du .WSDL  -->
+   </provide>
+
+	<invoke partnerLink="calculateur">
+		<service name="nsc:CalculateurImplService"
+				port="CalculateurImplPort"/>
+	</invoke>
+	
+	<invoke partnerLink="myRemoteLogger">
+		<service name="nsc:MyRemoteLoggerImplService"
+				port="MyRemoteLoggerImplPort"/>
+	</invoke>
+
+    
+    
+    
+  </process>
+</deploy>
