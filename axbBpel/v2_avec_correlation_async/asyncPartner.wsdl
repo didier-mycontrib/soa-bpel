@@ -1,0 +1,22 @@
+<definitions name="properties"
+        targetNamespace="http://tp"
+        xmlns:tns="http://tp"
+        xmlns:nsc="http://service.tp/"
+        xmlns:nscb="http://callback.tp/"
+        xmlns:plnk="http://docs.oasis-open.org/wsbpel/2.0/plnktype"
+        xmlns="http://schemas.xmlsoap.org/wsdl/"
+        xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+        xmlns:vprop="http://docs.oasis-open.org/wsbpel/2.0/varprop" 
+        xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+        >
+        
+   <import location="myRemoteLogger.wsdl" namespace="http://service.tp/" />   
+   <import location="myRemoteCallback.wsdl" namespace="http://callback.tp/" />       
+  
+   <plnk:partnerLinkType name="myRemotePartnerLinkType">
+        <plnk:role name="myRemoteCallback" portType="nscb:MyRemoteCallback"/>
+        <plnk:role name="myRemoteLogger" portType="nsc:MyRemoteLogger"/>
+    </plnk:partnerLinkType>
+        
+        
+</definitions>        

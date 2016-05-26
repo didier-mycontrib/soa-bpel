@@ -1,0 +1,15 @@
+<definitions name="properties"
+        targetNamespace="http://tp"
+        xmlns:tns="http://tp"    
+        xmlns:plnk="http://docs.oasis-open.org/wsbpel/2.0/plnktype"
+        xmlns="http://schemas.xmlsoap.org/wsdl/"
+        xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+        xmlns:vprop="http://docs.oasis-open.org/wsbpel/2.0/varprop" 
+        xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+        >
+        
+  <vprop:property name="number" type="xsd:int"/>
+ 
+        
+        
+</definitions>        

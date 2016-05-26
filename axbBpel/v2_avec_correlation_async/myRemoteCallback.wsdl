@@ -1,0 +1,51 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<wsdl:definitions 
+xmlns:plnk="http://docs.oasis-open.org/wsbpel/2.0/plnktype"
+xmlns:vprop="http://docs.oasis-open.org/wsbpel/2.0/varprop" 
+name="MyRemoteCallbackImplService" targetNamespace="http://callback.tp/" xmlns:ns1="http://schemas.xmlsoap.org/soap/http" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://callback.tp/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+
+<wsdl:import location="abstractProperties.wsdl" namespace="http://tp" />
+
+  <wsdl:types>
+<xs:schema elementFormDefault="unqualified" targetNamespace="http://callback.tp/" version="1.0" xmlns:tns="http://callback.tp/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+<xs:element name="notifyCorrelation" type="tns:notifyCorrelation"/>
+<xs:complexType name="notifyCorrelation">
+    <xs:sequence>
+      <xs:element name="numero" type="xs:int"/>
+      <xs:element minOccurs="0" name="notifMsg" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>
+  </wsdl:types>
+  <wsdl:message name="notifyCorrelation">
+    <wsdl:part element="tns:notifyCorrelation" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="MyRemoteCallback">
+    <wsdl:operation name="notifyCorrelation">
+      <wsdl:input message="tns:notifyCorrelation" name="notifyCorrelation">
+    </wsdl:input>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="MyRemoteCallbackImplServiceSoapBinding" type="tns:MyRemoteCallback">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="notifyCorrelation">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="notifyCorrelation">
+        <soap:body use="literal"/>
+      </wsdl:input>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="MyRemoteCallbackImplService">
+    <wsdl:port binding="tns:MyRemoteCallbackImplServiceSoapBinding" name="MyRemoteCallbackImplPort">
+      <soap:address location="http://localhost:8080/ode/processes/axb/myRemoteCallback"/>
+    </wsdl:port>
+  </wsdl:service>
+  
+ 
+     <vprop:propertyAlias propertyName="corr:number" xmlns:corr="http://tp"
+    		messageType="tns:notifyCorrelation" part="parameters">
+		<vprop:query>numero</vprop:query>
+		<!-- element name or xpath expr -->
+	</vprop:propertyAlias> 
+</wsdl:definitions>

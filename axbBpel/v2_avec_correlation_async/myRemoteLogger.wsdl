@@ -1,0 +1,73 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<wsdl:definitions 
+xmlns:vprop="http://docs.oasis-open.org/wsbpel/2.0/varprop" 
+xmlns:plnk="http://docs.oasis-open.org/wsbpel/2.0/plnktype"
+name="MyRemoteLoggerImplService" targetNamespace="http://service.tp/" xmlns:ns1="http://schemas.xmlsoap.org/soap/http" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://service.tp/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+
+<wsdl:import location="abstractProperties.wsdl" namespace="http://tp" />
+
+  <wsdl:types>
+<xs:schema elementFormDefault="unqualified" targetNamespace="http://service.tp/" version="1.0" xmlns:tns="http://service.tp/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+<xs:element name="logMessage" type="tns:logMessage"/>
+<xs:element name="testCorrelation" type="tns:testCorrelation"/>
+<xs:complexType name="logMessage">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="msg" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="testCorrelation">
+    <xs:sequence>
+      <xs:element name="numero" type="xs:int"/>
+      <xs:element minOccurs="0" name="requestMsg" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>
+  </wsdl:types>
+  <wsdl:message name="testCorrelation">
+    <wsdl:part element="tns:testCorrelation" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="logMessage">
+    <wsdl:part element="tns:logMessage" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="MyRemoteLogger">
+    <wsdl:operation name="logMessage">
+      <wsdl:input message="tns:logMessage" name="logMessage">
+    </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="testCorrelation">
+      <wsdl:input message="tns:testCorrelation" name="testCorrelation">
+    </wsdl:input>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="MyRemoteLoggerImplServiceSoapBinding" type="tns:MyRemoteLogger">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="logMessage">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="logMessage">
+        <soap:body use="literal"/>
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="testCorrelation">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="testCorrelation">
+        <soap:body use="literal"/>
+      </wsdl:input>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="MyRemoteLoggerImplService">
+    <wsdl:port binding="tns:MyRemoteLoggerImplServiceSoapBinding" name="MyRemoteLoggerImplPort">
+      <soap:address location="http://localhost:8080/wsCalculateur/services/myRemoteLogger"/>
+    </wsdl:port>
+  </wsdl:service>
+  
+     
+    <vprop:propertyAlias propertyName="corr:number"
+           xmlns:corr="http://tp"
+    		messageType="tns:testCorrelation" part="parameters">
+		<vprop:query>numero</vprop:query>
+		<!-- element name or xpath expr -->
+	</vprop:propertyAlias> 
+    
+</wsdl:definitions>
